@@ -1,5 +1,5 @@
-//管道都是单向通信的，要实现父子进程之间的交互就需要两条管道，父子进程各一条
-//无名管道只适用于具有公共祖先(亲缘关系)的进程之间的通信，因此，无名管道不能用于网络通信
+// 管道都是单向通信的，要实现父子进程之间的交互就需要两条管道，父子进程各一条
+// 无名管道只适用于具有公共祖先(亲缘关系)的进程之间的通信，因此，无名管道不能用于网络通信
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
@@ -10,8 +10,8 @@
 int main(void)
 {
 	pid_t pid;
-	int fd[2]; //父进程管道
-	int fd2[2]; //子进程管道
+	int fd[2]; //父进程向子进程传输的管道
+	int fd2[2]; //子进程向父进程传输的管道
 
 	if(pipe(fd) == -1)
 		perror("pipe");
@@ -34,7 +34,7 @@ int main(void)
 			read(fd[0], tmp, sizeof(tmp));
 
 			for(i = 0; i < sizeof(tmp); i++)
-				tmp[i] = toupper(tmp[i]);
+				tmp[i] = toupper(tmp[i]); // 把小写字母转换为大写字母
 
 			write(fd2[1], tmp, sizeof(tmp));
 		}

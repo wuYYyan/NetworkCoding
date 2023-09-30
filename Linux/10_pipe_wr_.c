@@ -1,4 +1,4 @@
-//无名管道练习
+// 无名管道练习
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
@@ -22,11 +22,11 @@ int main(void)
 
 		while(1)
 		{
-			scanf("%s", tmp);
+			scanf("%s", tmp); // 注意读取输入的最后不加换行符
 			write(fd[1], tmp, sizeof(tmp));
 		}
 	}
-	else if(pid > 0) //父进程从管道中读取子进程写入的内容并保存到tmp中
+	else if(pid > 0) // 父进程从管道中读取子进程写入的内容并保存到tmp中
 	{
 		char tmp[100];
 		close(fd[1]);

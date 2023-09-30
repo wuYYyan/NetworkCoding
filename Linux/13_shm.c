@@ -8,14 +8,14 @@
 
 char msg[] = "Hello world";
 
-//在父子进程之间使用共享内存(shm = shared memory)进行通讯
+// 在父子进程之间使用共享内存(shm = shared memory)进行通讯
 int main(void)
 {
-	int shmid;
+	int shmid; // 共享内存的标识符类型为整型
 	pid_t pid;
 
 	shmid = shmget(IPC_PRIVATE, 1024, IPC_CREAT); 
-	//创建共享内存，返回共享内存的标识符(在kernel中对内存的索引/键)
+	// 创建大小为1024字节的共享内存，返回共享内存的标识符(在kernel中对内存的索引/键)
 
 	pid = fork(); //创建子进程
 
@@ -23,7 +23,8 @@ int main(void)
 	{
 		char *p_addr;
 		p_addr = shmat(shmid, NULL, 0); 
-		//将共享内存映射到父进程的地址空间，父进程对该共享内存具有读写权限，返回映射之后的内存单元的地址
+		// 将共享内存映射到父进程的地址空间，父进程对该共享内存具有读写权限，返回映射之后的内存单元的地址
+		// 在父进程中对p_addr的操作就是对共享内存的操作
 
 		memset(p_addr, '\0', sizeof(msg)); //按字节清空
 		memcpy(p_addr, msg, sizeof(msg)); //按字节拷贝

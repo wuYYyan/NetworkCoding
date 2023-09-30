@@ -29,14 +29,14 @@ int main(void)
 		exit(1);
 	}
 
-	pthread_join(pthread1, NULL); //等待第一个线程结束
-	pthread_join(pthread2, NULL); //等待第二个线程结束
+	pthread_join(pthread1, NULL); //进程等待第一个线程结束
+	pthread_join(pthread2, NULL); //进程等待第二个线程结束
 	printf("The thread is over, process is over too.\n");
 
 	return 0;
 }
 
-//两个线程输出的count成对增加，因为它们共享系统资源
+// 两个线程输出的count成对增加，因为它们共享系统资源
 void *thread1_function(void *arg)
 {
 	printf("Thread1 begins running\n");

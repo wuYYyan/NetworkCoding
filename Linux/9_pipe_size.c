@@ -1,3 +1,4 @@
+// 测试无名管道大小
 #include <unistd.h>
 #include <sys/types.h>
 #include <stdio.h>
@@ -22,13 +23,13 @@ int main(void)
 
 		while(1)
 		{
-			write(fd[1], &ch, 1);
+			write(fd[1], &ch, 1); // 每次写一个字节
 			printf("count = %d\n", ++n);
-			//管道的默认容量为65536字节，当写入的数据超过65536字节时，会阻塞
+			// 管道的默认容量为65536字节，当写入的数据超过65536字节时，会阻塞
 		}
 	}
-	else if(pid > 0)  //parent process: wait until child process is over(父进程等待子进程结束)
+	else if(pid > 0)  // parent process: wait until child process is over(父进程等待子进程结束)
 	{
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, 0); // 等待指定pid号的子进程结束
 	}
 }
