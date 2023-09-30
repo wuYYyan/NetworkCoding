@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	//1.socket()
+	// 1.socket()
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	//2.connect()
+	// 2.connect()
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(PORT_ID);
 	server_addr.sin_addr.s_addr = inet_addr(argv[1]);

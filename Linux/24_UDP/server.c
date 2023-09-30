@@ -1,3 +1,4 @@
+// UDP服务器端程序
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -15,10 +16,10 @@ int main(void)
 	int addr_len;
 	char buf[SIZE];
 
-	//1.socket()
+	// 1.socket()
 	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 
-	//2.bind()
+	// 2.bind()
 	my_addr.sin_family = AF_INET;
 	my_addr.sin_port = htons(PORT_ID);
 	my_addr.sin_addr.s_addr = INADDR_ANY;
@@ -29,13 +30,14 @@ int main(void)
 	while(1)
 	{
 		printf("Server is waiting for client to connect:\n");
-		//4.recvfrom()：阻塞等待客户端连接
+		
+		// 4.recvfrom()：阻塞等待客户端连接
 		recvfrom(sockfd, buf, SIZE, 0, (struct sockaddr *)&client_addr, &addr_len); 
-		//UDP不面向连接，所以在形参中需要传递客户端的地址，否则不知道从哪里接收数据
+		// UDP不面向连接，所以在形参中需要传递客户端的地址，否则不知道从哪里接收数据
 		printf("Server receive from client: %s\n", buf);
 	}
 
-	close(sockfd); //不面向连接，因此只需要关闭服务器套接字
+	close(sockfd); // 不面向连接，因此只需要关闭服务器套接字
 
 	return 0;
 }

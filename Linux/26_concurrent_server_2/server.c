@@ -21,16 +21,16 @@ int main(void)
 	int addr_len;
 	pthread_t pthread;
 
-	//1.socket()
+	// 1.socket()
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	//2.bind()
+	// 2.bind()
 	my_addr.sin_family = AF_INET;
 	my_addr.sin_port = htons(PORT_ID);
 	my_addr.sin_addr.s_addr = INADDR_ANY;
 	bind(sockfd, (struct sockaddr *)&my_addr, sizeof(struct sockaddr));
 
-	//3.listen()
+	// 3.listen()
 	listen(sockfd, 10);
 
 	addr_len = sizeof(struct sockaddr);
@@ -38,11 +38,11 @@ int main(void)
 	while(1)
 	{
 		printf("Server is waiting for client to connect:\n");
-		//4.accept()：阻塞并等待客户端的连接请求
+		// 4.accept()：阻塞并等待客户端的连接请求
 		client_sockfd = accept(sockfd, (struct sockaddr *)&client_addr, &addr_len);
 		pthread_create(&pthread, NULL, thread_function, NULL); 
-		//当有客户端连接时才创建一个线程，不会造成资源的浪费，但可能会造成线程的频繁创建和销毁，响应时间较长
-		//创建线程之后，到线程处理函数中进行数据的收发与客户端的相应
+		// 当有客户端连接时才创建一个线程，不会造成资源的浪费，但可能会造成线程的频繁创建和销毁，响应时间较长
+		// 创建线程之后，到线程处理函数中进行数据的收发与客户端的相应
 	}
 
 	close(sockfd);
@@ -53,7 +53,7 @@ int main(void)
 void *thread_function(void *arg)
 {
 	printf("Client IP address = %s\n", inet_ntoa(client_addr.sin_addr));
-	//5.send()
+	// 5.send()
 	send(client_sockfd, welcome, SIZE, 0);
 	printf("Disconnect the client request.\n");
 	close(client_sockfd);

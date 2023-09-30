@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-	kill(atoi(argv[1]), SIGQUIT); //向argv[1]指定的id号发送信号SIGQUIT
+	kill(atoi(argv[1]), SIGQUIT); // 向argv[1]指定id号的进程发送信号SIGQUIT
 
 	return 0;
 }

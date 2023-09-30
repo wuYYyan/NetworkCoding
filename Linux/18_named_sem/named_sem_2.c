@@ -5,14 +5,14 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 
-//使用命名信号量在无亲缘关系的进程之间进行通信
+// 使用命名信号量在无亲缘关系的进程之间进行通信
 int main(void)
 {
 	sem_t *sem;
 	int i = 0;
 
 	sem = sem_open("NAMED_SEM", O_CREAT, 666, 0);
-	//该信号量已被创建，因此该语句的作用只是打开信号量，后两个实参将被忽略
+	// 该信号量已被创建，因此该语句的作用只是打开信号量，后两个实参将被忽略
 
 	while(1)
 	{
